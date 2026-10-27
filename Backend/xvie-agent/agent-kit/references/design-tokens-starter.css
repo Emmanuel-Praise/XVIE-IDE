@@ -1,0 +1,156 @@
+/* Design Tokens Starter — XvieAIWF
+ * =====================================================================
+ * Single source of truth for website builds (vanilla path).
+ * RULE: page CSS must reference these via var() — never hand-type raw
+ * oklch() colors or font-size values outside this file.
+ * Tailwind path: mirror these values in theme.extend (see comment block
+ * at the bottom of this file).
+ * Companion references: tokens.md (3-layer spine), color.md, typography.md.
+ * ===================================================================== */
+
+:root {
+  /* ---- Color strategy: Restrained default (neutral + 1 accent) ---- */
+  --accent-hue: 250; /* brand hue — replace per brief */
+
+  /* Neutral ramp — warm tint, not pure gray (OKLCH) */
+  --gray-50:  oklch(98% 0.008 60);
+  --gray-100: oklch(95% 0.010 60);
+  --gray-200: oklch(90% 0.012 60);
+  --gray-300: oklch(82% 0.014 60);
+  --gray-400: oklch(70% 0.016 60);
+  --gray-500: oklch(58% 0.016 60);
+  --gray-600: oklch(46% 0.015 60);
+  --gray-700: oklch(36% 0.013 60);
+  --gray-800: oklch(26% 0.010 60);
+  --gray-900: oklch(18% 0.008 60);
+  --gray-950: oklch(12% 0.006 60);
+
+  /* Accent ramp — replace hue with the brand value */
+  --accent-50:  oklch(97% 0.03 var(--accent-hue));
+  --accent-100: oklch(93% 0.06 var(--accent-hue));
+  --accent-200: oklch(86% 0.10 var(--accent-hue));
+  --accent-300: oklch(78% 0.14 var(--accent-hue));
+  --accent-400: oklch(68% 0.18 var(--accent-hue));
+  --accent-500: oklch(58% 0.20 var(--accent-hue));
+  --accent-600: oklch(48% 0.19 var(--accent-hue));
+  --accent-700: oklch(38% 0.16 var(--accent-hue));
+  --accent-800: oklch(30% 0.13 var(--accent-hue));
+  --accent-900: oklch(22% 0.10 var(--accent-hue));
+
+  /* Semantic roles */
+  --color-bg: var(--gray-50);
+  --color-surface: oklch(100% 0 0);
+  --color-ink: var(--gray-900);
+  --color-muted: var(--gray-600);
+  --color-line: var(--gray-200);
+  --color-accent: var(--accent-600);
+  --color-accent-ink: oklch(100% 0 0);
+  --color-success: oklch(65% 0.18 150);
+  --color-warning: oklch(75% 0.16 80);
+  --color-danger: oklch(60% 0.20 25);
+
+  /* ---- Type ramp (enumerated, 16px root) ---- */
+  --fs-08: 0.5rem;   /* 8px  — micro labels only */
+  --fs-09: 0.5625rem;
+  --fs-10: 0.625rem; /* 10px — legal smallprint floor */
+  --fs-11: 0.6875rem;/* 11px — functional UI floor */
+  --fs-12: 0.75rem;
+  --fs-13: 0.8125rem;
+  --fs-14: 0.875rem;
+  --fs-15: 0.9375rem;
+  --fs-16: 1rem;     /* 16px — body floor (no iOS zoom) */
+  --fs-18: 1.125rem;
+  --fs-20: 1.25rem;
+  --fs-24: 1.5rem;
+  --fs-28: 1.75rem;
+  --fs-32: 2rem;
+  --fs-40: 2.5rem;
+  --fs-48: 3rem;
+  --fs-56: 3.5rem;
+  --fs-64: 4rem;
+  --fs-72: 4.5rem;
+  --fs-80: 5rem;
+  --fs-88: 5.5rem;
+
+  /* Only 2 fluid exceptions — everything else uses the ramp above */
+  --fs-display: clamp(3.4rem, 6.5vw, 5.6rem);
+  --fs-headline: clamp(2.6rem, 4vw, 3.4rem);
+
+  --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-body); /* replace with ≤1 display face ≥1.2rem use only */
+  --font-mono: ui-monospace, "Cascadia Mono", monospace; /* code/data only */
+
+  /* ---- Spacing ---- */
+  --sp-08: 0.5rem;
+  --sp-16: 1rem;
+  --sp-24: 1.5rem;
+  --sp-32: 2rem;
+  --sp-48: 3rem;
+  --sp-80: 5rem;
+  --sp-112: 7rem;
+
+  /* Section rhythm — MUST vary per section */
+  --section-hero: 8rem;
+  --section-features: 6rem;
+  --section-demo: 4rem;
+  --section-pricing: 6rem;
+  --section-cta: 5rem;
+  --section-footer: 3rem;
+
+  /* ---- Radius ---- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --radius-2xl: 12px;
+  --radius-3xl: 14px;
+  --radius-4xl: 16px;
+  --radius-pill: 999px;
+
+  /* ---- Shadows (only 3 — hairline first, border OR shadow never both) ---- */
+  --shadow-panel: 0 24px 70px oklch(20% 0.01 60 / 0.18);
+  --shadow-cta: 0 18px 48px oklch(20% 0.01 60 / 0.22), inset 0 1px 0 oklch(100% 0 0 / 0.25);
+  --shadow-live-dot: 0 0 22px oklch(70% 0.15 160 / 0.8);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-focal: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-feedback: 150ms;
+  --dur-state: 250ms;
+  --dur-layout: 400ms;
+  --dur-focal: 650ms;
+  --dur-max-ui: 300ms; /* hard cap for UI chrome (focal entrance exempt) */
+  --stagger-step: 50ms;
+
+  /* ---- Browser surfaces (theme from palette) ---- */
+  --selection-bg: var(--accent-200);
+  --focus-ring: var(--accent-600);
+}
+
+::selection { background: var(--selection-bg); }
+:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 4px; }
+html { font-variant-numeric: tabular-nums; }
+
+/* Reduced motion — mandatory companion: reduce, never erase feedback */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Tailwind mirror (theme.extend) — keep values identical to above:
+ *
+ * theme.extend = {
+ *   colors: { ink: 'oklch(...)', muted: ..., line: ..., accent: { DEFAULT, ... } },
+ *   fontSize: { micro: '0.5rem', ..., display: 'clamp(3.4rem,6.5vw,5.6rem)' },
+ *   spacing: { 8: '0.5rem', 16: '1rem', 24: '1.5rem', 32: '2rem', 48: '3rem', 80: '5rem', 112: '7rem' },
+ *   borderRadius: { xs: '2px', sm: '4px', md: '6px', lg: '8px', xl: '10px', '2xl': '12px' },
+ *   transitionTimingFunction: { out: 'cubic-bezier(0.23,1,0.32,1)', inout: 'cubic-bezier(0.77,0,0.175,1)', drawer: 'cubic-bezier(0.32,0.72,0,1)' },
+ *   transitionDuration: { feedback: '150ms', state: '250ms', layout: '400ms', focal: '650ms' },
+ * }
+ */

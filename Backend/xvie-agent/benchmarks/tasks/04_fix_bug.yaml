@@ -1,0 +1,15 @@
+id: "04_fix_bug"
+name: "Fix divide by zero"
+lane: "coding"
+prompt: "Fix the divide function in math_utils.py so it handles division by zero."
+fixtures:
+  - path: "math_utils.py"
+    content: |
+      def divide(a, b):
+          return a / b
+checkers:
+  - type: "file_contains"
+    file: "math_utils.py"
+    expected: "ZeroDivisionError"
+  - type: "output_contains"
+    expected: "zero"

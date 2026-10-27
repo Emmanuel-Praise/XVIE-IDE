@@ -1,0 +1,15 @@
+id: "02_read_and_explain"
+name: "Read and explain function"
+lane: "planning"
+prompt: "What does the add function in math_utils.py do?"
+fixtures:
+  - path: "math_utils.py"
+    content: |
+      def add(a: int, b: int) -> int:
+          """Return the sum of two integers."""
+          return a + b
+checkers:
+  - type: "output_contains"
+    expected: "sum"
+  - type: "output_contains"
+    expected: "add"

@@ -1,0 +1,82 @@
+/* Scoped styles for the Agent tab — flat "workbench" look, theme tokens only.
+   No gradients, glows, dotted backdrops or float/shimmer animations. */
+
+/* ---- Markdown prose ---- */
+.agent-prose { font-size: var(--text-body-md); line-height: 1.7; color: var(--on-surface); overflow-wrap: anywhere; }
+.agent-prose > *:first-child { margin-top: 0; }
+.agent-prose > *:last-child { margin-bottom: 0; }
+.agent-prose h1, .agent-prose h2, .agent-prose h3, .agent-prose h4 { font-family: var(--font-body-md); font-weight: 700; letter-spacing: -0.01em; color: var(--on-surface); margin-top: 1.25rem; margin-bottom: 0.5rem; line-height: 1.35; }
+.agent-prose h1 { font-size: 16px; } .agent-prose h2 { font-size: 14px; } .agent-prose h3 { font-size: 13px; } .agent-prose h4 { font-size: 12px; }
+.agent-prose p { margin: 0.55rem 0; }
+.agent-prose a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+.agent-prose strong { font-weight: 700; color: var(--on-surface); }
+.agent-prose ul, .agent-prose ol { margin: 0.5rem 0; padding-left: 1.25rem; }
+.agent-prose li { margin: 0.28rem 0; }
+.agent-prose li::marker { color: var(--secondary); }
+.agent-prose ul > li, .agent-prose ol > li { padding-left: 0.25rem; }
+.agent-prose li > ul, .agent-prose li > ol { margin: 0.2rem 0; }
+.agent-prose blockquote { margin: 0.7rem 0; padding: 0.5rem 0.9rem; border-left: 2px solid var(--outline-variant); color: var(--secondary); }
+.agent-prose code { font-family: var(--font-label-md); font-size: 11.5px; padding: 0.12rem 0.38rem; border-radius: 5px; background: var(--surface-container-high); color: var(--syntax-string); }
+.agent-prose hr { margin: 1rem 0; border: 0; border-top: 1px solid var(--outline-variant); }
+.agent-prose table { width: 100%; margin: 0.7rem 0; border-collapse: collapse; font-size: var(--text-body-sm); }
+.agent-prose th, .agent-prose td { padding: 0.4rem 0.6rem; border: 1px solid var(--outline-variant); text-align: left; }
+.agent-prose th { background: var(--surface-container-low); font-weight: 600; color: var(--on-surface); }
+
+/* ---- Inline tool rows (transcript activity) ---- */
+.agent-tool-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.3rem 0.25rem;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: default;
+}
+.agent-tool-row[data-kind="think"] { border-radius: 5px; }
+.agent-tool-row[data-kind="think"]:hover { background: color-mix(in srgb, var(--primary) 7%, transparent); }
+.agent-tool-row[data-status="running"] .agent-tool-name { animation: agent-running-label 1.6s ease-in-out infinite; }
+@keyframes agent-running-label { 50% { opacity: 0.58; } }
+.agent-tool-row .agent-tool-status { flex: none; width: 12px; display: inline-flex; justify-content: center; color: var(--secondary); }
+.agent-tool-row[data-status="completed"] .agent-tool-status { color: var(--secondary); }
+.agent-tool-row[data-status="failed"] .agent-tool-status { color: var(--error); }
+.agent-tool-row .agent-tool-name { flex: none; font-family: var(--font-label-sm); font-size: var(--text-body-sm); line-height: 18px; color: var(--on-surface); }
+.agent-tool-row .agent-tool-target { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-body-sm); font-size: var(--text-body-sm); color: var(--secondary); }
+.agent-tool-row .agent-tool-diff { flex: none; font-family: var(--font-label-sm); font-size: var(--text-label-sm); }
+.agent-tool-row .agent-tool-diff .add { color: #1a7f37; }
+.agent-tool-row .agent-tool-diff .del { color: #cf222e; }
+.dark .agent-tool-row .agent-tool-diff .add { color: #3fb950; }
+.dark .agent-tool-row .agent-tool-diff .del { color: #f85149; }
+.agent-diff-added { color: #18733a; background: color-mix(in srgb, #2da44e 9%, transparent); }
+.agent-diff-removed { color: #b4232f; background: color-mix(in srgb, #cf222e 9%, transparent); }
+.agent-diff-hunk { color: #647fda; background: color-mix(in srgb, #647fda 9%, transparent); }
+.dark .agent-diff-added { color: #7ee787; }
+.dark .agent-diff-removed { color: #ff9b9b; }
+.dark .agent-diff-hunk { color: #a5b4fc; }
+
+/* Collapsed sub-steps under a tool row */
+.agent-thought-summary { border-left: 1px solid color-mix(in srgb, var(--primary) 55%, transparent); }
+.agent-tool-detail li { font-family: var(--font-label-xs); font-size: var(--text-label-xs); color: var(--secondary); list-style: none; padding: 0.1rem 0 0.1rem 0.6rem; }
+
+/* Small deterministic spinner for running rows */
+.agent-tool-spin {
+  width: 10px; height: 10px; border-radius: 50%;
+  border: 1.5px solid var(--outline-variant);
+  border-top-color: var(--on-surface);
+  animation: agent-tool-rotate 0.8s linear infinite;
+}
+@keyframes agent-tool-rotate { to { transform: rotate(360deg); } }
+
+/* ---- User turn: soft right-aligned bubble ---- */
+.agent-user-bubble { background: var(--surface-container-low); border: 1px solid var(--outline-variant); }
+
+/* Single blink caret used while a message streams */
+.agent-caret { display: inline-block; width: 7px; height: 1em; margin-left: 2px; vertical-align: text-bottom; background: var(--on-surface); animation: agent-caret-blink 1s steps(2, start) infinite; }
+@keyframes agent-caret-blink { to { visibility: hidden; } }
+
+/* ---- Scrollbars ---- */
+.agent-code-scroll { scrollbar-width: auto; scrollbar-color: var(--outline-variant) var(--surface-container-lowest); scrollbar-gutter: stable; overscroll-behavior: contain; }
+.agent-code-scroll::-webkit-scrollbar { width: 10px; height: 10px; }
+.agent-code-scroll::-webkit-scrollbar-thumb { background: var(--outline-variant); border: 2px solid var(--surface-container-lowest); border-radius: 8px; }
+.agent-code-scroll::-webkit-scrollbar-thumb:hover { background: var(--secondary); }

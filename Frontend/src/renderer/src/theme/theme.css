@@ -1,0 +1,351 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Light theme tokens */
+:root {
+  --background: #F5F5F5;
+  --on-background: #1a1c1c;
+  --surface: #F5F5F5;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f1efed;
+  --surface-container: #ebe9e7;
+  --surface-container-high: #e5e3e0;
+  --surface-container-highest: #dfddda;
+  --surface-dim: #d8d6d3;
+  --surface-bright: #F5F5F5;
+  --surface-variant: #dfddda;
+  --primary: #1a1917;
+  --on-primary: #ffffff;
+  --primary-container: #2c2a28;
+  --on-primary-container: #8a8785;
+  --secondary: #605e5a;
+  --on-secondary: #ffffff;
+  --secondary-container: #e6e3de;
+  --on-secondary-container: #6b6964;
+  --tertiary: #1a1c1e;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #1e2022;
+  --on-tertiary-container: #878584;
+  --outline: #827f7a;
+  --outline-variant: #d1cec9;
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+  --inverse-surface: #2f3131;
+  --inverse-on-surface: #f0f1f1;
+  --inverse-primary: #c6c6c6;
+  --surface-tint: #636160;
+
+  /* Editor canvas — white in light mode, distinct from the light chrome */
+  --editor-surface: #ffffff;
+  --editor-surface-raised: #f0eeec;
+  --editor-text: #1a1c1c;
+  --editor-text-dim: #76767e;
+  --editor-text-bright: #000000;
+  --editor-text-accent: #46464f;
+  --terminal-surface: #ffffff;
+  --editor-chrome: #f2f0ee;
+
+  /* Syntax highlighting tokens (consumed by the Monaco theme) — VS Code Light+ */
+  --syntax-comment: #008000;
+  --syntax-keyword: #0000ff;
+  --syntax-keyword-control: #af00db;
+  --syntax-string: #a31515;
+  --syntax-number: #098658;
+  --syntax-type: #267f99;
+  --syntax-function: #795e26;
+  --syntax-variable: #001080;
+  --syntax-constant: #0070c1;
+  --syntax-operator: #000000;
+  --syntax-tag: #800000;
+  --syntax-attribute: #e50000;
+  --syntax-punctuation: #000000;
+  --syntax-regexp: #811f3f;
+  --syntax-escape: #811f3f;
+  --syntax-decorator: #795e26;
+}
+
+/* Dark theme tokens */
+.dark {
+  --background: #000000;
+  --on-background: #e3e1df;
+  --surface: #000000;
+  --surface-container-lowest: #0f0e0d;
+  --surface-container-low: #1d1c1a;
+  --surface-container: #21201e;
+  --surface-container-high: #2c2a28;
+  --surface-container-highest: #373533;
+  --surface-dim: #000000;
+  --surface-bright: #3b3937;
+  --surface-variant: #494644;
+  --primary: #c8c5c0;
+  --on-primary: #302f2d;
+  --primary-container: #4a4845;
+  --on-primary-container: #e4e1dc;
+  --secondary: #c9c7c2;
+  --on-secondary: #31302e;
+  --secondary-container: #484643;
+  --on-secondary-container: #e6e3de;
+  --tertiary: #c8c6c4;
+  --on-tertiary: #31302f;
+  --tertiary-container: #484745;
+  --on-tertiary-container: #e4e2e0;
+  --outline: #9b9893;
+  --outline-variant: #494644;
+  --error: #ffb4ab;
+  --on-error: #690005;
+  --error-container: #93000a;
+  --on-error-container: #ffdad6;
+  --inverse-surface: #e3e1df;
+  --inverse-on-surface: #2f3131;
+  --inverse-primary: #1a1c1c;
+  --surface-tint: #c8c5c0;
+
+  /* Dark editor canvas — near black, clearly darker than the dark chrome */
+  --editor-surface: #080707;
+  --editor-surface-raised: #161514;
+  --editor-text: #dbd9d5;
+  --editor-text-dim: #8e8c88;
+  --editor-text-bright: #f4f2ee;
+  --editor-text-accent: #b8b5b0;
+  --terminal-surface: #141413;
+  --editor-chrome: #100f0e;
+
+  /* Syntax highlighting tokens (consumed by the Monaco theme) — VS Code Dark+ */
+  --syntax-comment: #6a9955;
+  --syntax-keyword: #569cd6;
+  --syntax-keyword-control: #c586c0;
+  --syntax-string: #ce9178;
+  --syntax-number: #b5cea8;
+  --syntax-type: #4ec9b0;
+  --syntax-function: #dcdcaa;
+  --syntax-variable: #9cdcfe;
+  --syntax-constant: #4fc1ff;
+  --syntax-operator: #d4d4d4;
+  --syntax-tag: #569cd6;
+  --syntax-attribute: #9cdcfe;
+  --syntax-punctuation: #d4d4d4;
+  --syntax-regexp: #d16969;
+  --syntax-escape: #d7ba7d;
+  --syntax-decorator: #dcdcaa;
+}
+
+/* Map tokens to Tailwind color utilities */
+@theme inline {
+  --color-background: var(--background);
+  --color-on-background: var(--on-background);
+  --color-surface: var(--surface);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-bright: var(--surface-bright);
+  --color-surface-variant: var(--surface-variant);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-secondary: var(--secondary);
+  --color-on-secondary: var(--on-secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary-container: var(--on-secondary-container);
+  --color-tertiary: var(--tertiary);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  --color-error: var(--error);
+  --color-on-error: var(--on-error);
+  --color-error-container: var(--error-container);
+  --color-on-error-container: var(--on-error-container);
+  --color-inverse-surface: var(--inverse-surface);
+  --color-inverse-on-surface: var(--inverse-on-surface);
+  --color-inverse-primary: var(--inverse-primary);
+  --color-surface-tint: var(--surface-tint);
+
+  --color-editor-surface: var(--editor-surface);
+  --color-editor-surface-raised: var(--editor-surface-raised);
+  --color-editor-text: var(--editor-text);
+  --color-editor-text-dim: var(--editor-text-dim);
+  --color-editor-text-bright: var(--editor-text-bright);
+  --color-editor-text-accent: var(--editor-text-accent);
+  --color-terminal-surface: var(--terminal-surface);
+  --color-editor-chrome: var(--editor-chrome);
+
+  --font-body-md: "Inter Variable", sans-serif;
+  --font-label-md: "JetBrains Mono Variable", monospace;
+  --font-headline-sm: "Inter Variable", sans-serif;
+  --font-headline-md: "Inter Variable", sans-serif;
+  --font-headline-lg: "Inter Variable", sans-serif;
+  --font-headline-lg-mobile: "Inter Variable", sans-serif;
+  --font-body-lg: "Inter Variable", sans-serif;
+  --font-body-sm: "Inter Variable", sans-serif;
+  --font-label-xs: "JetBrains Mono Variable", monospace;
+  --font-label-sm: "JetBrains Mono Variable", monospace;
+
+  --text-headline-sm: 16px;
+  --text-headline-sm--line-height: 24px;
+  --text-headline-sm--font-weight: 600;
+  --text-headline-md: 22px;
+  --text-headline-md--line-height: 28px;
+  --text-headline-md--letter-spacing: -0.01em;
+  --text-headline-md--font-weight: 600;
+  --text-headline-lg: 26px;
+  --text-headline-lg--line-height: 34px;
+  --text-headline-lg--letter-spacing: -0.02em;
+  --text-headline-lg--font-weight: 600;
+  --text-headline-lg-mobile: 24px;
+  --text-headline-lg-mobile--line-height: 32px;
+  --text-headline-lg-mobile--font-weight: 600;
+  --text-body-lg: 16px;
+  --text-body-lg--line-height: 23px;
+  --text-body-lg--font-weight: 400;
+  --text-body-md: 14px;
+  --text-body-md--line-height: 19px;
+  --text-body-md--font-weight: 400;
+  --text-body-sm: 13px;
+  --text-body-sm--line-height: 17px;
+  --text-body-sm--font-weight: 400;
+  --text-label-md: 12px;
+  --text-label-md--line-height: 15px;
+  --text-label-md--font-weight: 500;
+  --text-label-xs: 11px;
+  --text-label-xs--line-height: 14px;
+  --text-label-xs--letter-spacing: 0.02em;
+  --text-label-xs--font-weight: 500;
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 15px;
+  --text-label-sm--letter-spacing: 0.02em;
+  --text-label-sm--font-weight: 500;
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-margin-desktop: 2rem;
+  --spacing-margin-mobile: 1rem;
+}
+
+@keyframes loadProgress {
+  0% {
+    width: 0%;
+  }
+  30% {
+    width: 45%;
+  }
+  60% {
+    width: 72%;
+  }
+  80% {
+    width: 88%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.loading-bar-animation {
+  animation: loadProgress 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes dotPulse {
+  0%, 80%, 100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.dot-pulse-1 { animation: dotPulse 1.4s ease-in-out infinite; }
+.dot-pulse-2 { animation: dotPulse 1.4s ease-in-out 0.2s infinite; }
+.dot-pulse-3 { animation: dotPulse 1.4s ease-in-out 0.4s infinite; }
+
+@keyframes subtleFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: subtleFadeIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.fade-in-up-delay-1 { animation-delay: 0.1s; }
+.fade-in-up-delay-2 { animation-delay: 0.2s; }
+.fade-in-up-delay-3 { animation-delay: 0.3s; }
+
+/* Theme-aware scrollbars — exclude Monaco editor so it uses native scrollbar styling */
+*:not(.monaco-editor):not(.monaco-editor *) {
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-container-highest) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-container-highest);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--outline);
+}
+
+/* Fixed previews for the theme choice screen (show the theme regardless of current mode) */
+.theme-preview-light {
+  background-color: #F5F5F5;
+  color: #1a1c1c;
+}
+
+.theme-preview-dark {
+  background-color: #000000;
+  color: #e3e1df;
+}
+
+/* Subtle dot grid used behind the editor empty state */
+.editor-dot-grid {
+  background-image: radial-gradient(circle, var(--editor-text-dim) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Surface texture overlay for depth */
+.surface-texture {
+  position: relative;
+}
+.surface-texture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* Hover lift utility */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.12);
+}
+.dark .hover-lift:hover {
+  box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.35);
+}

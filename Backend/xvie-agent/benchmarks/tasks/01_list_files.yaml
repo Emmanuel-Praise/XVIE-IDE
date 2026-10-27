@@ -1,0 +1,14 @@
+id: "01_list_files"
+name: "List project files"
+lane: "fast_edit"
+prompt: "List all Python files in this project."
+fixtures:
+  - path: "math_utils.py"
+    content: "def add(a, b): return a + b\n\ndef subtract(a, b): return a - b\n"
+  - path: "string_utils.py"
+    content: "def reverse(s): return s[::-1]\n"
+checkers:
+  - type: "output_contains"
+    expected: "math_utils.py"
+  - type: "output_contains"
+    expected: "string_utils.py"

@@ -1,0 +1,264 @@
+﻿# xvie-agent routing configuration
+#
+# Models ranked by ACTUAL test results (easy/medium/hard coding challenges).
+# Tested 2026-08-22 against NVIDIA NIM API with tool-calling. Refreshed
+# 2026-09-07: only models from the current NVIDIA build catalog (verified live
+# with tool-calling). Nimtron 3 Super retired → Nemotron 3 Ultra 550B is the
+# fleet flagships, with Kimi K3 / Lightning / Laguna as verified fallbacks.
+#
+# Tier 1: Always pass all 3 challenges (reliable tool callers)
+# Tier 2: Pass easy+medium, sometimes hard
+# Tier 3: Inconsistent — sometimes outputs JSON text instead of tool calls
+# Tier 4: Never pass — no tool calls (DO NOT USE for agentic coding)
+
+roles:
+  reliable:
+    requires:
+      supports_tools: true
+    temperature: 0.1
+    max_tokens: 16000
+    models:
+      # --- Tier 1: Proven reliable across all difficulty levels ---
+      - provider: nvidia
+        id: "nvidia/nemotron-3-ultra-550b-a55b"
+        display_name: "Nemotron 3 Ultra 550B"
+        context_window: 131072
+        supports_tools: true
+        supports_reasoning: true
+        plan_compliance: strong
+        role_tags: [reliable, coding, planning, agentic]
+      - provider: nvidia
+        id: "moonshotai/kimi-k3"
+        display_name: "Kimi K3"
+        context_window: 131072
+        supports_tools: true
+        supports_reasoning: true
+        plan_compliance: strong
+        role_tags: [reliable, coding, planning, agentic]
+      # --- Tier 2: Good but may struggle on hard multi-file ---
+      - provider: nvidia
+        id: "nvidia/nemotron-3.5-lightning-30b-a3b"
+        display_name: "Nemotron 3.5 Lightning 30B"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [reliable, coding, fast]
+      - provider: nvidia
+        id: "poolside/laguna-xs-2.1"
+        display_name: "Laguna XS 2.1"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [coding, agentic]
+
+  fast:
+    requires:
+      supports_tools: true
+    temperature: 0.2
+    max_tokens: 4000
+    models:
+      - provider: nvidia
+        id: "nvidia/nemotron-3.5-lightning-30b-a3b"
+        display_name: "Nemotron 3.5 Lightning 30B"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [fast, chat]
+      - provider: nvidia
+        id: "poolside/laguna-xs-2.1"
+        display_name: "Laguna XS 2.1"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [fast, chat]
+
+  reasoning:
+    requires:
+      supports_reasoning: true
+    temperature: 0.3
+    max_tokens: 6000
+    models:
+      - provider: nvidia
+        id: "nvidia/nemotron-3-ultra-550b-a55b"
+        display_name: "Nemotron 3 Ultra 550B"
+        context_window: 131072
+        supports_tools: true
+        supports_reasoning: true
+        plan_compliance: strong
+        role_tags: [reasoning, planning, thinking, agentic]
+      - provider: nvidia
+        id: "moonshotai/kimi-k3"
+        display_name: "Kimi K3"
+        context_window: 131072
+        supports_tools: true
+        supports_reasoning: true
+        plan_compliance: strong
+        role_tags: [reasoning, planning]
+
+  planning:
+    requires: {}
+    temperature: 0.5
+    max_tokens: 4000
+    models:
+      - provider: nvidia
+        id: "nvidia/nemotron-3-ultra-550b-a55b"
+        display_name: "Nemotron 3 Ultra 550B"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [planning, reasoning, agentic]
+      - provider: nvidia
+        id: "moonshotai/kimi-k3"
+        display_name: "Kimi K3"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [planning, reasoning]
+
+  coding:
+    requires: {}
+    temperature: 0.0
+    max_tokens: 16000
+    models:
+      # --- Tier 1: Proven reliable for coding ---
+      - provider: nvidia
+        id: "nvidia/nemotron-3-ultra-550b-a55b"
+        display_name: "Nemotron 3 Ultra 550B"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [coding, codegen, agentic]
+      - provider: nvidia
+        id: "moonshotai/kimi-k3"
+        display_name: "Kimi K3"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [coding, codegen, agentic]
+      - provider: nvidia
+        id: "poolside/laguna-xs-2.1"
+        display_name: "Laguna XS 2.1"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [coding, agentic]
+      - provider: nvidia
+        id: "nvidia/nemotron-3.5-lightning-30b-a3b"
+        display_name: "Nemotron 3.5 Lightning 30B"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [coding, codegen]
+
+  ui_design:
+    requires: {}
+    temperature: 0.4
+    max_tokens: 16000
+    models:
+      - provider: nvidia
+        id: "moonshotai/kimi-k3"
+        display_name: "Kimi K3"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [ui, frontend, design, agentic]
+      - provider: nvidia
+        id: "nvidia/nemotron-3-ultra-550b-a55b"
+        display_name: "Nemotron 3 Ultra 550B"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [ui, frontend]
+      - provider: nvidia
+        id: "poolside/laguna-xs-2.1"
+        display_name: "Laguna XS 2.1"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [ui, frontend]
+
+  fast_edit:
+    requires: {}
+    temperature: 0.0
+    max_tokens: 2000
+    models:
+      - provider: nvidia
+        id: "nvidia/nemotron-3.5-lightning-30b-a3b"
+        display_name: "Nemotron 3.5 Lightning 30B"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [fast, mechanical]
+
+  debug:
+    requires:
+      supports_tools: true
+    temperature: 0.1
+    max_tokens: 16000
+    models:
+      # Debugging needs reasoning + tool use — pick the strongest models
+      - provider: nvidia
+        id: "nvidia/nemotron-3-ultra-550b-a55b"
+        display_name: "Nemotron 3 Ultra 550B"
+        context_window: 131072
+        supports_tools: true
+        supports_reasoning: true
+        plan_compliance: strong
+        role_tags: [debug, reasoning, coding, agentic]
+      - provider: nvidia
+        id: "moonshotai/kimi-k3"
+        display_name: "Kimi K3"
+        context_window: 131072
+        supports_tools: true
+        supports_reasoning: true
+        plan_compliance: strong
+        role_tags: [debug, reasoning, coding]
+      - provider: nvidia
+        id: "nvidia/nemotron-3.5-lightning-30b-a3b"
+        display_name: "Nemotron 3.5 Lightning 30B"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [debug, coding, fast]
+
+  brainstorm:
+    requires: {}
+    temperature: 0.7
+    max_tokens: 8000
+    models:
+      # Brainstorming favors reasoning and creativity, tools optional
+      - provider: nvidia
+        id: "moonshotai/kimi-k3"
+        display_name: "Kimi K3"
+        context_window: 131072
+        supports_tools: true
+        supports_reasoning: true
+        plan_compliance: strong
+        role_tags: [brainstorm, reasoning, creative]
+      - provider: nvidia
+        id: "nvidia/nemotron-3-ultra-550b-a55b"
+        display_name: "Nemotron 3 Ultra 550B"
+        context_window: 131072
+        supports_tools: true
+        supports_reasoning: true
+        plan_compliance: strong
+        role_tags: [brainstorm, reasoning, creative]
+      - provider: nvidia
+        id: "nvidia/nemotron-3.5-lightning-30b-a3b"
+        display_name: "Nemotron 3.5 Lightning 30B"
+        context_window: 131072
+        supports_tools: true
+        plan_compliance: strong
+        role_tags: [brainstorm, creative]
+
+# Lane aliases — map CLI --lane values to role names
+lanes:
+  reliable: reliable
+  fast: fast
+  reasoning: reasoning
+  planning: planning
+  coding: coding
+  ui_design: ui_design
+  fast_edit: fast_edit
+  debug: debug
+  brainstorm: brainstorm

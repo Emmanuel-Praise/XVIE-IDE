@@ -1,0 +1,16 @@
+id: "05_multi_file_exploration"
+name: "Summarize codebase"
+lane: "planning"
+prompt: "Summarize all Python files in this project in 3 sentences."
+fixtures:
+  - path: "math_utils.py"
+    content: "def add(a, b): return a + b\n"
+  - path: "string_utils.py"
+    content: "def reverse(s): return s[::-1]\n"
+  - path: "config.py"
+    content: "DEBUG = True\nVERSION = '1.0'\n"
+checkers:
+  - type: "output_contains"
+    expected: "math_utils"
+  - type: "output_contains"
+    expected: "string_utils"

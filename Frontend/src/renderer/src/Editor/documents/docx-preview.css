@@ -1,0 +1,166 @@
+/* ── DOCX Preview ─────────────────────────────────────────────────
+   Renders the HTML produced by the custom JSZip OOXML parser in docx-viewer.tsx.
+   Theme-aware via CSS custom properties defined in theme.css.
+   ───────────────────────────────────────────────────────────────── */
+
+.docx-preview {
+  height: 100%;
+  overflow-y: auto;
+  background: var(--editor-surface);
+}
+
+.docx-preview__content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 40px 96px;
+  color: var(--editor-text);
+  font-family: var(--font-body-md), "Inter Variable", sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  word-wrap: break-word;
+}
+
+.docx-preview__content h1,
+.docx-preview__content h2,
+.docx-preview__content h3,
+.docx-preview__content h4,
+.docx-preview__content h5,
+.docx-preview__content h6 {
+  font-family: var(--font-headline-md), "Inter Variable", sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--editor-text-bright);
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+}
+
+.docx-preview__content h1 {
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.docx-preview__content h2 {
+  font-size: 1.35rem;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.docx-preview__content h3 {
+  font-size: 1.15rem;
+}
+
+.docx-preview__content h4 {
+  font-size: 1rem;
+}
+
+.docx-preview__content > :first-child {
+  margin-top: 0;
+}
+
+.docx-preview__content p {
+  margin: 0 0 1em;
+}
+
+.docx-preview__content a {
+  color: var(--primary);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
+  font-weight: 500;
+}
+
+.docx-preview__content a:hover {
+  border-bottom-color: var(--primary);
+  opacity: 0.85;
+}
+
+.docx-preview__content strong {
+  font-weight: 700;
+  color: var(--editor-text-bright);
+}
+
+.docx-preview__content em {
+  font-style: italic;
+}
+
+.docx-preview__content ul,
+.docx-preview__content ol {
+  margin: 0 0 1em;
+  padding-left: 1.6em;
+}
+
+.docx-preview__content ul {
+  list-style: disc;
+}
+
+.docx-preview__content ol {
+  list-style: decimal;
+}
+
+.docx-preview__content li {
+  margin: 0.3em 0;
+}
+
+.docx-preview__content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.2em;
+  font-size: 0.875rem;
+  border: 1px solid var(--outline-variant);
+}
+
+.docx-preview__content th,
+.docx-preview__content td {
+  padding: 0.6em 0.9em;
+  text-align: left;
+  border-bottom: 1px solid var(--outline-variant);
+  border-right: 1px solid var(--outline-variant);
+  vertical-align: top;
+}
+
+.docx-preview__content th:last-child,
+.docx-preview__content td:last-child {
+  border-right: none;
+}
+
+.docx-preview__content tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.docx-preview__content th {
+  font-weight: 600;
+  color: var(--editor-text-bright);
+  background: var(--editor-surface-raised);
+}
+
+.docx-preview__content tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--editor-surface-raised) 50%, transparent);
+}
+
+.docx-preview__content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 0.5em 0;
+  border: 1px solid var(--outline-variant);
+}
+
+.docx-preview__content hr {
+  border: none;
+  border-top: 1px solid var(--outline-variant);
+  margin: 2em 0;
+}
+
+.docx-preview__content blockquote {
+  margin: 0 0 1.2em;
+  padding: 0.6em 1.1em;
+  border-left: 3px solid var(--primary);
+  background: color-mix(in srgb, var(--primary) 6%, transparent);
+  border-radius: 0 8px 8px 0;
+  color: var(--editor-text-dim);
+}
+
+.docx-preview__content ::selection {
+  background: color-mix(in srgb, var(--primary) 25%, transparent);
+}

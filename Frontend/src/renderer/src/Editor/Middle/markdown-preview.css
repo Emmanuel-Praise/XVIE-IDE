@@ -1,0 +1,340 @@
+/* ── Markdown Preview ───────────────────────────────────────────────
+   A polished, document-style rendering for .md files in the editor.
+   Theme-aware via CSS custom properties defined in theme.css.
+   ────────────────────────────────────────────────────────────────── */
+
+.md-preview {
+  height: 100%;
+  overflow-y: auto;
+  background: var(--editor-surface);
+  color: var(--editor-text);
+  font-family: var(--font-body-md), "Inter Variable", sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.md-preview__scroll {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 40px 96px;
+}
+
+.md-preview h1,
+.md-preview h2,
+.md-preview h3,
+.md-preview h4,
+.md-preview h5,
+.md-preview h6 {
+  font-family: var(--font-headline-md), "Inter Variable", sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--editor-text-bright);
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+  scroll-margin-top: 24px;
+}
+
+.md-preview h1 {
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.md-preview h2 {
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.md-preview h3 {
+  font-size: 1.25rem;
+}
+
+.md-preview h4 {
+  font-size: 1.0625rem;
+}
+
+.md-preview h5 {
+  font-size: 0.9375rem;
+}
+
+.md-preview h6 {
+  font-size: 0.875rem;
+  color: var(--editor-text-dim);
+}
+
+.md-preview > :first-child {
+  margin-top: 0;
+}
+
+.md-preview p {
+  margin: 0 0 1em;
+}
+
+.md-preview a {
+  color: var(--primary);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
+  transition: border-color 0.15s ease, opacity 0.15s ease;
+  font-weight: 500;
+}
+
+.md-preview a:hover {
+  border-bottom-color: var(--primary);
+  opacity: 0.85;
+}
+
+.md-preview a[href^="http"]::after {
+  content: "";
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  margin-left: 0.25em;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'/%3E%3Cpolyline points='15 3 21 3 21 9'/%3E%3Cline x1='10' y1='14' x2='21' y2='3'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'/%3E%3Cpolyline points='15 3 21 3 21 9'/%3E%3Cline x1='10' y1='14' x2='21' y2='3'/%3E%3C/svg%3E") center / contain no-repeat;
+  opacity: 0.5;
+  vertical-align: middle;
+}
+
+.md-preview strong {
+  font-weight: 700;
+  color: var(--editor-text-bright);
+}
+
+.md-preview em {
+  font-style: italic;
+}
+
+.md-preview del,
+.md-preview s {
+  color: var(--editor-text-dim);
+}
+
+.md-preview ul,
+.md-preview ol {
+  margin: 0 0 1em;
+  padding-left: 1.5em;
+}
+
+.md-preview ul {
+  list-style: disc;
+}
+
+.md-preview ol {
+  list-style: decimal;
+}
+
+.md-preview li {
+  margin: 0.3em 0;
+}
+
+.md-preview li::marker {
+  color: var(--editor-text-dim);
+}
+
+.md-preview li > ul,
+.md-preview li > ol {
+  margin: 0.3em 0;
+}
+
+/* Task lists */
+.md-preview li.task-list-item {
+  list-style: none;
+  margin-left: -1.4em;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55em;
+}
+
+.md-preview li.task-list-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  margin-top: 0.3em;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  border: 1.5px solid var(--outline);
+  border-radius: 4px;
+  background: transparent;
+  cursor: default;
+  position: relative;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.md-preview li.task-list-item input[type="checkbox"]:checked {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.md-preview li.task-list-item input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 0.28em;
+  top: 0.08em;
+  width: 0.32em;
+  height: 0.6em;
+  border: solid var(--on-primary);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.md-preview li.task-list-item input[type="checkbox"]:disabled {
+  cursor: default;
+}
+
+/* Inline code */
+.md-preview :not(pre) > code {
+  font-family: var(--font-label-sm), "JetBrains Mono Variable", monospace;
+  font-size: 0.85em;
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  color: color-mix(in srgb, var(--primary) 85%, var(--editor-text));
+  padding: 0.15em 0.4em;
+  border-radius: 5px;
+  border: 1px solid color-mix(in srgb, var(--primary) 12%, transparent);
+  word-break: break-word;
+}
+
+/* Code blocks */
+.md-preview pre {
+  margin: 0 0 1.2em;
+  border-radius: 12px;
+  border: 1px solid var(--outline-variant);
+  background: var(--editor-surface-raised);
+  overflow: hidden;
+}
+
+.md-preview pre code {
+  display: block;
+  padding: 1em 1.1em;
+  overflow-x: auto;
+  font-family: var(--font-label-sm), "JetBrains Mono Variable", monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  background: transparent !important;
+  color: var(--editor-text);
+  tab-size: 2;
+}
+
+/* Blockquotes */
+.md-preview blockquote {
+  margin: 0 0 1.2em;
+  padding: 0.6em 1.1em;
+  border-left: 3px solid var(--primary);
+  background: color-mix(in srgb, var(--primary) 6%, transparent);
+  border-radius: 0 8px 8px 0;
+  color: var(--editor-text-dim);
+}
+
+.md-preview blockquote p {
+  margin: 0.3em 0;
+}
+
+.md-preview blockquote > :first-child {
+  margin-top: 0;
+}
+
+.md-preview blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* Tables */
+.md-preview table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.2em;
+  font-size: 0.875rem;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid var(--outline-variant);
+}
+
+.md-preview thead {
+  background: var(--editor-surface-raised);
+}
+
+.md-preview th,
+.md-preview td {
+  padding: 0.6em 0.9em;
+  text-align: left;
+  border-bottom: 1px solid var(--outline-variant);
+  border-right: 1px solid var(--outline-variant);
+}
+
+.md-preview th:last-child,
+.md-preview td:last-child {
+  border-right: none;
+}
+
+.md-preview tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.md-preview th {
+  font-weight: 600;
+  color: var(--editor-text-bright);
+}
+
+.md-preview tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--editor-surface-raised) 50%, transparent);
+}
+
+.md-preview tbody tr:hover {
+  background: color-mix(in srgb, var(--primary) 5%, transparent);
+}
+
+/* Images */
+.md-preview img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 0.5em 0;
+  border: 1px solid var(--outline-variant);
+}
+
+/* Horizontal rule */
+.md-preview hr {
+  border: none;
+  border-top: 1px solid var(--outline-variant);
+  margin: 2em 0;
+}
+
+/* Keyboard keys */
+.md-preview kbd {
+  font-family: var(--font-label-sm), "JetBrains Mono Variable", monospace;
+  font-size: 0.8em;
+  background: var(--editor-surface-raised);
+  color: var(--editor-text);
+  border: 1px solid var(--outline-variant);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 0.1em 0.4em;
+}
+
+/* Definition lists / footnotes */
+.md-preview dl {
+  margin: 0 0 1.2em;
+}
+
+.md-preview dt {
+  font-weight: 600;
+  margin-top: 0.6em;
+}
+
+.md-preview dd {
+  margin: 0.2em 0 0.6em 1.2em;
+  color: var(--editor-text-dim);
+}
+
+/* Footnote anchors */
+.md-preview sup a {
+  border: none;
+  color: var(--primary);
+}
+
+/* Selection */
+.md-preview ::selection {
+  background: color-mix(in srgb, var(--primary) 25%, transparent);
+}

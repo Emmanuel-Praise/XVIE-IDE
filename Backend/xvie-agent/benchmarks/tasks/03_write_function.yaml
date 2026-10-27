@@ -1,0 +1,14 @@
+id: "03_write_function"
+name: "Write a multiply function"
+lane: "coding"
+prompt: "Add a multiply function to math_utils.py that multiplies two numbers."
+fixtures:
+  - path: "math_utils.py"
+    content: "def add(a, b): return a + b\n\ndef subtract(a, b): return a - b\n"
+checkers:
+  - type: "file_contains"
+    file: "math_utils.py"
+    expected: "multiply"
+  - type: "file_contains"
+    file: "math_utils.py"
+    expected: "return a * b"

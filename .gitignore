@@ -1,0 +1,52 @@
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Dependencies and Python environments
+node_modules/
+**/node_modules/
+.venv/
+**/.venv/
+venv/
+**/venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+
+# Generated builds and caches
+out/
+**/out/
+dist/
+**/dist/
+build/
+**/build/
+*.tsbuildinfo
+.pytest_cache/
+**/.pytest_cache/
+.pytest-tmp/
+**/.pytest-tmp/
+.pytest-run/
+**/.pytest-run/
+.mypy_cache/
+.ruff_cache/
+.kilo/
+.xvie/
+.xvie-sessions/
+.forge-sessions/
+
+# Logs and local databases
+*.log
+*.err
+*.sqlite
+*.sqlite3
+*.db
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
